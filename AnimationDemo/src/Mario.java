@@ -26,10 +26,10 @@ public class Mario extends Sprite {
 
 	public void act(ArrayList<Shape> obstacles) {
 		// FALL (and stop when a platform is hit)
-		int finalY;
+		int finalY = 9999999;
 		for (Shape obstacle : obstacles) {
 			if (obstacle.getBounds2D().getWidth() > 0) {
-				if (obstacle.getBounds2D().getX() < x && obstacle.getBounds2D().getX() + obstacle.getBounds2D().getWidth() > x) {
+				if (obstacle.getBounds2D().getX() < x && obstacle.getBounds2D().getX() + obstacle.getBounds2D().getWidth() > x && obstacle.getBounds2D().getY() < finalY) {
 					finalY = (int) obstacle.getBounds2D().getY();
 				}
 			}
