@@ -18,9 +18,11 @@ public class Mario extends Sprite {
 		// WALK!
 	}
 
-	public void jump() {
-		walk(2);
-	}
+    public void jump()
+    {
+        moveToLocation(super.x, super.y + MARIO_HEIGHT);
+        moveToLocation(super.x, super.y - MARIO_HEIGHT);
+    }
 
 	public void act(ArrayList<Shape> obstacles) {
 		// FALL (and stop when a platform is hit)
