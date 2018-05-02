@@ -26,14 +26,6 @@ public class Mario extends Sprite
         walk(2);
     }
 
-<<<<<<< HEAD
-    public void act(ArrayList<Shape> obstacles)
-    {
-        // FALL (and stop when a platform is hit)
-    }
-
-}
-=======
 	public void act(ArrayList<Shape> obstacles) {
 		// FALL (and stop when a platform is hit)
 		int finalY = 9999999;
@@ -49,4 +41,3 @@ public class Mario extends Sprite
 		moveToLocation(x, finalY);
 	}
 }
->>>>>>> branch 'master' of https://github.com/WarrenGrugett/AnimationDemo
