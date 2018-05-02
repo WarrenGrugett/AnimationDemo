@@ -18,7 +18,10 @@ public class Mario extends Sprite
     // METHODS
     public void walk(int dir)
     {
+<<<<<<< HEAD
         // WALK!!!
+=======
+>>>>>>> branch 'master' of https://github.com/WarrenGrugett/AnimationDemo
     }
 
     public void jump()
