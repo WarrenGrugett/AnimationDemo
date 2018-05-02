@@ -42,6 +42,8 @@ public class Mario extends Sprite
 				if (obstacle.getBounds2D().getX() < x && obstacle.getBounds2D().getX() + obstacle.getBounds2D().getWidth() > x && obstacle.getBounds2D().getY() < finalY) {
 					finalY = (int) (obstacle.getBounds2D().getY() - MARIO_HEIGHT);
 				}
+			} else if (obstacle.getBounds2D().getWidth() < 0) {
+				
 			}
 		}
 		moveToLocation(x, finalY);
