@@ -1,7 +1,6 @@
 
-import java.awt.geom.Rectangle2D;
-import processing.core.PApplet;
-import processing.core.PImage;
+import java.awt.geom.*;
+import processing.core.*;
 
 /*
  * Represents a moving image.
@@ -12,16 +11,13 @@ import processing.core.PImage;
 public class Sprite extends Rectangle2D.Double {
 
 	private static final long serialVersionUID = 1L;
-	// FIELDS
 	private PImage image;
 
-	// CONSTRUCTORS
 	public Sprite(PImage img, int x, int y, int w, int h) {
 		super(x, y, w, h);
 		image = img;
 	}
 
-	// METHODS
 	public void moveToLocation(double x, double y) {
 		super.x = x;
 		super.y = y;
@@ -42,5 +38,4 @@ public class Sprite extends Rectangle2D.Double {
 	public void draw(PApplet g) {
 		g.image(image, (int) x, (int) y, (int) width, (int) height);
 	}
-
 }

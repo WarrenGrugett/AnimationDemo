@@ -1,42 +1,68 @@
 
 import java.awt.*;
+import java.awt.geom.*;
 import java.util.*;
-
-import processing.core.PImage;
+import processing.core.*;
 
 public class Mario extends Sprite {
-
-	public static final int MARIO_WIDTH = 40;
-	public static final int MARIO_HEIGHT = 60;
+	private static final long serialVersionUID = 1L;
+	public static final int MARIO_WIDTH = 40, MARIO_HEIGHT = 60;
+	private final double grav = 2;
+	private boolean jumping = false;
+	private double yVel = 0, xVel = 0;
 
 	public Mario(PImage img, int x, int y) {
 		super(img, x, y, MARIO_WIDTH, MARIO_HEIGHT);
 	}
 
-	// METHODS
 	public void walk(int dir) {
+		if (Math.abs(xVel) < 5)
+			xVel += dir;
 	}
 
 	public void jump() {
-		moveToLocation(super.x, super.y + MARIO_HEIGHT);
-		moveToLocation(super.x, super.y - MARIO_HEIGHT);
+		if (!jumping) {
+			yVel += 30;
+			jumping = true;
+		}
 	}
 
 	public void act(ArrayList<Shape> obstacles) {
-		// FALL (and stop when a platform is hit)
-		int finalY = 9999999;
-		for (Shape obstacle : obstacles) {
-			if (obstacle.getBounds2D().getWidth() > 0) {
-				if (obstacle.getBounds2D().getX() < x
-						&& obstacle.getBounds2D().getX() + obstacle.getBounds2D().getWidth() > x
-						&& obstacle.getBounds2D().getY() < finalY) {
-					finalY = (int) (obstacle.getBounds2D().getY() - MARIO_HEIGHT);
+		yVel -= grav;
+		moveByAmount(0, -yVel);
+		double newY = -1;
+		for (int i = 0; i < obstacles.size(); i++) {
+			if (obstacles.get(i).contains(new Point2D.Double(x, y - yVel + MARIO_HEIGHT))
+					|| obstacles.get(i).contains(new Point2D.Double(x + MARIO_WIDTH, y - yVel + MARIO_HEIGHT))) {
+				if (yVel < 0) {
+					newY = obstacles.get(i).getBounds2D().getY() - MARIO_HEIGHT;
+					yVel = 0;
+					jumping = false;
+				} else if (yVel > 0) {
+					newY = obstacles.get(i).getBounds2D().getY() + obstacles.get(i).getBounds2D().getHeight() + 10;
+					yVel = 0;
 				}
-			} else if (obstacle.getBounds2D().getWidth() < 0) {
-
 			}
 		}
-		moveToLocation(x, finalY);
+		if (newY != -1)
+			moveToLocation(x, newY);
+		if (xVel > 0)
+			xVel -= 0.5;
+		else if (xVel < 0)
+			xVel += 0.5;
+		double newX = -1;
+		for (int i = 0; i < obstacles.size(); i++) {
+			if (obstacles.get(i).contains(new Point2D.Double(x + xVel + MARIO_WIDTH, y))) {
+				newX = obstacles.get(i).getBounds2D().getX() - MARIO_WIDTH;
+				xVel = 0;
+			} else if (obstacles.get(i).contains(new Point2D.Double(x + xVel, y))) {
+				newX = obstacles.get(i).getBounds2D().getX() + obstacles.get(i).getBounds2D().getWidth();
+				xVel = 0;
+			}
+		}
+		System.out.println(newX + ", " + y);
+		moveByAmount(xVel, 0);
+		if (newX != -1)
+			moveToLocation(newX, y);
 	}
-
 }
