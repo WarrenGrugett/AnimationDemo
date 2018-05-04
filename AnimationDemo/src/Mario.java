@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.awt.geom.*;
 import java.util.*;
@@ -31,7 +30,7 @@ public class Mario extends Sprite {
 		yVel -= grav;
 		moveByAmount(0, -yVel);
 		double newY = -1;
-		for (int i = 0; i < obstacles.size(); i++) {
+		for (int i = 0; i < obstacles.size(); i++)
 			if (obstacles.get(i).contains(new Point2D.Double(x, y - yVel + MARIO_HEIGHT))
 					|| obstacles.get(i).contains(new Point2D.Double(x + MARIO_WIDTH, y - yVel + MARIO_HEIGHT))
 					|| obstacles.get(i).contains(new Point2D.Double(x, y - yVel))
@@ -45,7 +44,6 @@ public class Mario extends Sprite {
 					yVel = 0;
 				}
 			}
-		}
 		if (newY != -1)
 			moveToLocation(x, newY);
 		if (xVel > 0)
@@ -53,7 +51,7 @@ public class Mario extends Sprite {
 		else if (xVel < 0)
 			xVel += 0.5;
 		double newX = -1;
-		for (int i = 0; i < obstacles.size(); i++) {
+		for (int i = 0; i < obstacles.size(); i++)
 			if (obstacles.get(i).contains(new Point2D.Double(x + xVel + MARIO_WIDTH, y))) {
 				System.out.println(x + xVel + MARIO_WIDTH + ", " + y);
 				newX = obstacles.get(i).getBounds2D().getX() - MARIO_WIDTH;
@@ -62,7 +60,6 @@ public class Mario extends Sprite {
 				newX = obstacles.get(i).getBounds2D().getX() + obstacles.get(i).getBounds2D().getWidth();
 				xVel = 0;
 			}
-		}
 		moveByAmount(xVel, 0);
 		if (newX != -1)
 			moveToLocation(newX, y);
