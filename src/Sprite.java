@@ -3,7 +3,6 @@ import processing.core.*;
 
 /*
  * Represents a moving image.
- *
  * by: Shelby
  */
 
