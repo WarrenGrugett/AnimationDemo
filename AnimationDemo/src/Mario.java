@@ -16,7 +16,7 @@ public class Mario extends Sprite {
 	}
 
 	public void walk(int dir) {
-		if (Math.abs(xVel) < 5)
+		if (Math.abs(xVel) < 6)
 			xVel += dir;
 	}
 
@@ -33,7 +33,9 @@ public class Mario extends Sprite {
 		double newY = -1;
 		for (int i = 0; i < obstacles.size(); i++) {
 			if (obstacles.get(i).contains(new Point2D.Double(x, y - yVel + MARIO_HEIGHT))
-					|| obstacles.get(i).contains(new Point2D.Double(x + MARIO_WIDTH, y - yVel + MARIO_HEIGHT))) {
+					|| obstacles.get(i).contains(new Point2D.Double(x + MARIO_WIDTH, y - yVel + MARIO_HEIGHT))
+					|| obstacles.get(i).contains(new Point2D.Double(x, y - yVel))
+					|| obstacles.get(i).contains(new Point2D.Double(x + MARIO_WIDTH, y - yVel))) {
 				if (yVel < 0) {
 					newY = obstacles.get(i).getBounds2D().getY() - MARIO_HEIGHT;
 					yVel = 0;
@@ -53,6 +55,7 @@ public class Mario extends Sprite {
 		double newX = -1;
 		for (int i = 0; i < obstacles.size(); i++) {
 			if (obstacles.get(i).contains(new Point2D.Double(x + xVel + MARIO_WIDTH, y))) {
+				System.out.println(x + xVel + MARIO_WIDTH + ", " + y);
 				newX = obstacles.get(i).getBounds2D().getX() - MARIO_WIDTH;
 				xVel = 0;
 			} else if (obstacles.get(i).contains(new Point2D.Double(x + xVel, y))) {
@@ -60,7 +63,6 @@ public class Mario extends Sprite {
 				xVel = 0;
 			}
 		}
-		System.out.println(newX + ", " + y);
 		moveByAmount(xVel, 0);
 		if (newX != -1)
 			moveToLocation(newX, y);
