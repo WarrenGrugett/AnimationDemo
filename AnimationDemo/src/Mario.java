@@ -53,7 +53,6 @@ public class Mario extends Sprite {
 		double newX = -1;
 		for (int i = 0; i < obstacles.size(); i++)
 			if (obstacles.get(i).contains(new Point2D.Double(x + xVel + MARIO_WIDTH, y))) {
-				System.out.println(x + xVel + MARIO_WIDTH + ", " + y);
 				newX = obstacles.get(i).getBounds2D().getX() - MARIO_WIDTH;
 				xVel = 0;
 			} else if (obstacles.get(i).contains(new Point2D.Double(x + xVel, y))) {
