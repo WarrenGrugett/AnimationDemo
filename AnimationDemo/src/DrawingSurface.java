@@ -35,9 +35,7 @@ public class DrawingSurface extends PApplet {
 	// The statements in the setup() function
 	// execute once when the program begins
 	public void setup() {
-		// size(0,0,PApplet.P3D);
 		assets.add(loadImage("mario.png"));
-
 		spawnNewMario();
 	}
 
