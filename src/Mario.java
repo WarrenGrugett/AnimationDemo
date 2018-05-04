@@ -13,7 +13,7 @@ public class Mario extends Sprite {
 	public Mario(PImage img, int x, int y) {
 		super(img, x, y, MARIO_WIDTH, MARIO_HEIGHT);
 	}
-
+// adding a change
 	public void walk(int dir) {
 		if (Math.abs(xVel) < 6)
 			xVel += dir;
